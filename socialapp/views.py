@@ -41,7 +41,7 @@ class PostView(APIView):
     authentication_classes = [TokenAuthentication, ]
 
     def get(self, request):
-        posts_obj = Post.objects.all()
+        posts_obj = Post.objects.all().order_by('-id')
         data = commoneposts(posts_obj, request)
 
         return Response(data)
