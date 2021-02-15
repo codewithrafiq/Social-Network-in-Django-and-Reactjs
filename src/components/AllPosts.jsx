@@ -13,7 +13,7 @@ const AllPosts = () => {
         method: "GET",
         headers: header,
       }).then((response) => {
-        // console.log(response.data);
+        console.log(response.data);
         setAllposts(response.data);
       });
     };

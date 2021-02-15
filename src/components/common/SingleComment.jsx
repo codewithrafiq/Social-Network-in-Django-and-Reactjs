@@ -1,0 +1,56 @@
+import {
+  Avatar,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  IconButton,
+  TextField,
+  Typography,
+} from "@material-ui/core";
+import React, { useState } from "react";
+import SendIcon from "@material-ui/icons/Send";
+import SingleReply from "./SingleReply";
+
+const SingleComment = ({ comment }) => {
+  const [showReply, setShowReply] = useState(false);
+  return (
+    <Card>
+      <CardHeader
+        title={comment?.profile?.user?.username}
+        subheader={comment?.time}
+        avatar={<Avatar src={comment?.profile?.image} />}
+      />
+      <CardContent>
+        <Typography>{comment?.title}</Typography>
+        <Button onClick={() => setShowReply(!showReply)}>
+          Reply({comment?.reply.length})
+        </Button>
+      </CardContent>
+      {showReply && (
+        <Grid style={{ marginLeft: "40px" }} container diraction="column">
+          <TextField
+            style={{ width: "70%" }}
+            label="Reply"
+            variant="filled"
+            InputProps={{
+              endAdornment: (
+                <IconButton color="primary">
+                  <SendIcon />
+                </IconButton>
+              ),
+            }}
+          />
+          <Grid container diraction="column">
+            {comment?.reply?.map((item, i) => (
+              <SingleReply key={i} reply={item} />
+            ))}
+          </Grid>
+        </Grid>
+      )}
+    </Card>
+  );
+};
+
+export default SingleComment;
