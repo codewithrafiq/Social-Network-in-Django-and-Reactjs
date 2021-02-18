@@ -32,7 +32,7 @@ const SingleComment = ({ comment }) => {
       headers: header
     }).then(response => {
       let data = response.data
-      if (data['error'] == false) {
+      if (data['error'] === false) {
         dispatch({
           type: 'RELOAD',
           value: data
